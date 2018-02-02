@@ -1,0 +1,28 @@
+{
+  "name": "awesome-typed-data",
+  "version": "1.0.0",
+  "description": "Awesome typed datasets",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "npm run quicktype",
+    "quicktype": "quicktype datasets/*/index.json -o src/dataset.ts",
+    "generate": "npm run quicktype && ts-node src/generate.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typeguard/awesome-typed-datasets.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/typeguard/awesome-typed-datasets/issues"
+  },
+  "homepage": "https://github.com/typeguard/awesome-typed-datasets#readme",
+  "devDependencies": {
+    "@types/shelljs": "^0.7.8",
+    "quicktype": "^8.5.1",
+    "shelljs": "^0.8.1",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.7.1"
+  }
+}

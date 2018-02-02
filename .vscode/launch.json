@@ -1,0 +1,16 @@
+{
+  // Use IntelliSense to learn about possible Node.js debug attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "debug",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
+      "runtimeArgs": ["--nolazy"],
+      "args": ["script/build.ts"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector"
+    }
+  ]
+}
