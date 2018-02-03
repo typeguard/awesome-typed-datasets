@@ -72,7 +72,9 @@ function cloneOrCreateRepo(dataset: Dataset, slug: string, directory: string) {
   within(directory, () => {
     hub("init");
     hub(`commit --allow-empty -m create`);
-    hub(`create typeguard/types-${slug} -d "${dataset.name}"`);
+    hub(
+      `create typeguard/types-${slug} -d "${dataset.name}" -h "${dataset.url}"`
+    );
     hub("push --set-upstream origin master");
   });
 }
