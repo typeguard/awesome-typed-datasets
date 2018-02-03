@@ -1,0 +1,6 @@
+{
+  "name": "GitHub API",
+  "description": "Data about gists, events, emoji, and more.",
+  "url": "https://api.github.com/",
+  "category": "Technology"
+}
