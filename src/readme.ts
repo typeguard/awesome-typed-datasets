@@ -15,7 +15,7 @@ import { find } from "shelljs";
 
 export function dataset(data: DatasetMeta): string {
   function* generate() {
-    yield `# Typed ${data.dataset.name}`;
+    yield `# ${data.dataset.name} – Typed JSON API`;
     yield ``;
     yield `> ${data.dataset.description}`;
     yield ``;
