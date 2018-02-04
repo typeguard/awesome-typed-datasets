@@ -1,0 +1,6 @@
+{
+  "name": "Worldbank GDP",
+  "description": "Worldbank GDP data",
+  "url": "http://api.worldbank.org//",
+  "category": "Economics"
+}
