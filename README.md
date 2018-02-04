@@ -25,6 +25,7 @@ reading and writing the JSON produced by these APIs.
 ## Media
 
 * [Reddit](https://github.com/typeguard/typed-reddit) (reddit.com)
+* [Spotify Web API](https://github.com/typeguard/typed-spotify) (developer.spotify.com/web-api)
 
 ## Science
 

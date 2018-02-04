@@ -1,0 +1,8 @@
+{
+  "name": "Spotify Web API",
+  "description":
+    "Lets your applications fetch data from the Spotify music catalog and manage user’s playlists and saved music.",
+  "url": "https://developer.spotify.com/web-api/",
+  "category": "Media",
+  "oauth": "SPOTIFY_OAUTH_TOKEN"
+}
