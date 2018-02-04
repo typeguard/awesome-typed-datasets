@@ -1,21 +1,27 @@
 # Awesome Typed Data
 
-### Space
+The following are public JSON datasets that have been strongly
+typed with [quicktype](https://github.com/quicktype/quicktype).
+Each is a repo with code in Go, C++, Objective-C, Java, TypeScript, Swift, Elm, JSON Schema, and C# for
+reading and writing the JSON produced by these APIs.
 
-* [Open APIs From Space](https://github.com/typeguard/types-astronauts-in-space)
 
 ### Blockchain
 
-* [Blockchain Bitcoin APIs](https://github.com/typeguard/types-blockchain)
+* [Blockchain Bitcoin APIs](https://github.com/typeguard/types-blockchain) (blockchain.info)
 
 ### Finance
 
-* [Consumer Complaint Database](https://github.com/typeguard/types-consumer-complaints)
+* [Consumer Complaint Database](https://github.com/typeguard/types-consumer-complaints) (catalog.data.gov/dataset/consumer-complaint-database)
 
 ### Science
 
-* [USGS Earthquake Data](https://github.com/typeguard/types-earthquakes)
+* [USGS Earthquake Data](https://github.com/typeguard/types-earthquakes) (earthquake.usgs.gov)
+
+### Space
+
+* [Open APIs From Space](https://github.com/typeguard/types-astronauts-in-space) (open-notify.org)
 
 ### Technology
 
-* [GitHub API](https://github.com/typeguard/types-github)
+* [GitHub API](https://github.com/typeguard/types-github) (api.github.com)

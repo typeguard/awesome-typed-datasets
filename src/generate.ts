@@ -108,16 +108,37 @@ function readme(data: DatasetMeta[]): string {
     yield ``;
     yield `### ${name}`;
     yield ``;
+
     for (const meta of category) {
+      let simpleUrl = meta.dataset.url.split("//")[1];
+      if (simpleUrl.endsWith("/")) {
+        simpleUrl = simpleUrl.substr(0, simpleUrl.length - 1);
+      }
+
       yield `* [${meta.dataset.name}](https://github.com/typeguard/types-${
         meta.slug
-      })`;
+      }) (${simpleUrl})`;
     }
   }
 
   function* generate() {
     yield `# Awesome Typed Data`;
-    for (const name of Object.keys(categories)) {
+
+    const displayNames = languages
+      .map(l => l.displayName)
+      .filter(d => d !== "Simple Types");
+    const nameList =
+      displayNames.slice(1).join(", ") + ", and " + displayNames[0];
+
+    yield* [
+      ``,
+      `The following are public JSON datasets that have been strongly`,
+      `typed with [quicktype](https://github.com/quicktype/quicktype).`,
+      `Each is a repo with code in ${nameList} for`,
+      `reading and writing the JSON produced by these APIs.`,
+      ``
+    ];
+    for (const name of Object.keys(categories).sort()) {
       yield* categoryList(name, categories[name]);
     }
   }
@@ -131,6 +152,8 @@ function main() {
 
   // TODO make this work as an iterator
   const datasets = Array.from(getDatasets());
+
+  fs.writeFileSync("README.md", readme(datasets));
 
   for (const { slug, dataDir, dataset, repoDir } of datasets) {
     const scriptFile = path.join(repoDir, "quicktype.sh");
@@ -172,8 +195,6 @@ function main() {
       }
     });
   }
-
-  fs.writeFileSync("README.md", readme(datasets));
 }
 
 main();
