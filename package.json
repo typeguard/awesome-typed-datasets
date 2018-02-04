@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/typeguard/awesome-typed-datasets#readme",
   "devDependencies": {
+    "@types/lodash": "^4.14.100",
     "@types/shelljs": "^0.7.8",
-    "quicktype": "^8.5.3",
+    "lodash": "^4.17.5",
+    "quicktype": "^8.5.7",
     "shelljs": "^0.8.1",
     "ts-node": "^4.1.0",
     "typescript": "^2.7.1"
