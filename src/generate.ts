@@ -88,14 +88,17 @@ function* getDatasets() {
   }
 }
 
-function main() {
+function main(slugs: string[]) {
   rm("-rf", "repos");
   mkdir("repos");
 
   // TODO make this work as an iterator
-  const datasets = Array.from(getDatasets());
-
+  let datasets = Array.from(getDatasets());
   fs.writeFileSync("README.md", readme.main(datasets));
+
+  if (slugs.length > 0) {
+    datasets = datasets.filter(m => lo.includes(slugs, m.slug));
+  }
 
   for (const meta of datasets) {
     const scriptFile = path.join(meta.repoDir, "quicktype.sh");
@@ -147,4 +150,4 @@ function main() {
   }
 }
 
-main();
+main(process.argv.slice(2));
