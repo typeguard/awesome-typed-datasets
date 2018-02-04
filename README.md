@@ -18,6 +18,10 @@ reading and writing the JSON produced by these APIs.
 
 * [Consumer Complaint Database](https://github.com/typeguard/typed-consumer-complaints) (catalog.data.gov/dataset/consumer-complaint-database)
 
+## Gaming
+
+* [Magic: The Gathering](https://github.com/typeguard/typed-magic-the-gathering) (magic.wizards.com)
+
 ## Media
 
 * [Reddit](https://github.com/typeguard/typed-reddit) (reddit.com)
