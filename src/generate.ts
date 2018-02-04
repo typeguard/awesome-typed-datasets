@@ -4,8 +4,8 @@ import * as path from "path";
 import * as fs from "fs";
 
 import { Dataset, Convert } from "./dataset";
-import { repoFromSlug } from "./common";
-import readme from "./readme";
+import { repoFromSlug, DatasetMeta, languageShortname } from "./common";
+import * as readme from "./readme";
 
 import { languages } from "quicktype";
 import { TargetLanguage } from "quicktype/dist/TargetLanguage";
@@ -35,10 +35,6 @@ function remoteFromSlug(slug: string) {
   return `git@github.com:${repoFromSlug(slug)}`;
 }
 
-function shortname(language: TargetLanguage) {
-  return language.names.sort((x, y) => y.length - x.length)[0];
-}
-
 function precacheDataDirectory(dataDir: string) {
   mkdir("-p", DATASET_CACHE);
   const target = path.join(DATASET_CACHE, path.basename(dataDir));
@@ -63,12 +59,12 @@ function within(dir: string, work: () => void) {
   cd(cwd);
 }
 
-function cloneOrCreateRepo(dataset: Dataset, slug: string, directory: string) {
-  const cloneResult = hub(`clone ${remoteFromSlug(slug)} ${directory}`);
+function cloneOrCreateRepo({ repoDir, slug, dataset }: DatasetMeta) {
+  const cloneResult = hub(`clone ${remoteFromSlug(slug)} ${repoDir}`);
   if (cloneResult.code === 0) return;
 
-  mkdir("-p", directory);
-  within(directory, () => {
+  mkdir("-p", repoDir);
+  within(repoDir, () => {
     hub("init");
     hub(`commit --allow-empty -m create`);
     hub(
@@ -99,25 +95,28 @@ function main() {
   // TODO make this work as an iterator
   const datasets = Array.from(getDatasets());
 
-  fs.writeFileSync("README.md", readme(datasets));
+  fs.writeFileSync("README.md", readme.main(datasets));
 
-  for (const { slug, dataDir, dataset, repoDir } of datasets) {
-    const scriptFile = path.join(repoDir, "quicktype.sh");
-    const cachedDataDir = precacheDataDirectory(dataDir);
+  for (const meta of datasets) {
+    const scriptFile = path.join(meta.repoDir, "quicktype.sh");
+    const cachedDataDir = precacheDataDirectory(meta.dataDir);
 
-    cloneOrCreateRepo(dataset, slug, repoDir);
+    cloneOrCreateRepo(meta);
 
-    const targetDataDir = path.join(repoDir, "data");
+    const targetDataDir = path.join(meta.repoDir, "data");
     rm("-rf", targetDataDir);
-    cp("-r", dataDir, targetDataDir);
+    cp("-r", meta.dataDir, targetDataDir);
     rm(path.join(targetDataDir, "index.json"));
 
     let script = ["#!/bin/bash", ""];
 
     for (const language of languages) {
-      const langName = shortname(language);
-      const languageDir = path.join(repoDir, langName);
-      const mainFile = path.join(languageDir, `${slug}.${language.extension}`);
+      const langName = languageShortname(language);
+      const languageDir = path.join(meta.repoDir, langName);
+      const mainFile = path.join(
+        languageDir,
+        `${meta.slug}.${language.extension}`
+      );
 
       rm("-rf", languageDir);
       mkdir(languageDir);
@@ -132,7 +131,12 @@ function main() {
     fs.writeFileSync(scriptFile, script.join("\n"));
     chmod("+x", scriptFile);
 
-    within(repoDir, () => {
+    fs.writeFileSync(
+      path.join(meta.repoDir, "README.md"),
+      readme.dataset(meta)
+    );
+
+    within(meta.repoDir, () => {
       const hasChanges = exec("git status --porcelain").stdout.length > 0;
       if (hasChanges) {
         hub("add .");

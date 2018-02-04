@@ -1,9 +1,57 @@
+import * as fs from "fs";
+import * as path from "path";
+
 import { languages } from "quicktype";
 
-import { Dataset, DatasetMeta, repoFromSlug } from "./common";
-import * as lo from "lodash";
+import {
+  Dataset,
+  DatasetMeta,
+  repoFromSlug,
+  languageShortname
+} from "./common";
 
-export default function readme(data: DatasetMeta[]): string {
+import * as lo from "lodash";
+import { find } from "shelljs";
+
+export function dataset(data: DatasetMeta): string {
+  function* generate() {
+    yield `# Typed ${data.dataset.name}`;
+    yield ``;
+    yield `> ${data.dataset.description}`;
+    yield ``;
+
+    yield `## APIs`;
+    yield ``;
+    for (const urlFile of find(`${data.dataDir}/**/*.url`)) {
+      const name = path.basename(urlFile).replace(".url", "");
+      const url = fs.readFileSync(urlFile, "utf8").trim();
+
+      // TODO support multiple samples
+
+      yield `* \`${name}\`: ${url}`;
+    }
+    yield ``;
+
+    yield `## Libraries`;
+    yield ``;
+    for (const language of languages) {
+      yield `* [${language.displayName}](${languageShortname(language)})`;
+    }
+    yield ``;
+
+    yield `# Contributing`;
+    yield* [
+      ``,
+      `This repo is generated with [quicktype](https://github.com/quicktype/quicktype) from data in [typeguard/awesome-typed-datasets](https://github.com/typeguard/awesome-typed-datasets).`,
+      `To contribute, please visit those repos.`,
+      ``
+    ];
+  }
+
+  return Array.from(generate()).join("\n");
+}
+
+export function main(data: DatasetMeta[]): string {
   const categories = lo.groupBy(data, d => d.dataset.category);
 
   function* categoryList(name: string, category: DatasetMeta[]) {
