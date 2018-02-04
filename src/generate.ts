@@ -2,6 +2,7 @@ import { pwd, cd, exec, mv, cp, rm, cat, find, mkdir, chmod } from "shelljs";
 
 import * as path from "path";
 import * as fs from "fs";
+import * as lo from "lodash";
 
 import { Dataset, Convert } from "./dataset";
 import { repoFromSlug, DatasetMeta, languageShortname } from "./common";
@@ -35,7 +36,7 @@ function remoteFromSlug(slug: string) {
   return `git@github.com:${repoFromSlug(slug)}`;
 }
 
-function precacheDataDirectory(dataDir: string) {
+function precacheDataDirectory({ dataDir, dataset }: DatasetMeta) {
   mkdir("-p", DATASET_CACHE);
   const target = path.join(DATASET_CACHE, path.basename(dataDir));
   rm("-rf", target);
@@ -46,7 +47,16 @@ function precacheDataDirectory(dataDir: string) {
     const url = fs.readFileSync(urlFile, "utf8").trim();
     const jsonFile = urlFile.replace(".url", ".json");
     mkdir("-p", path.dirname(urlFile));
-    exec(`curl "${url}" -o "${jsonFile}"`);
+
+    let authenticate = "";
+    if (dataset.oauth !== undefined) {
+      const token = process.env[dataset.oauth];
+      authenticate = `-H "Authorization: Bearer ${token}"`;
+    }
+    exec(
+      `curl -X GET "${url}" -H "Accept: application/json" -o "${jsonFile}" ${authenticate}`
+    );
+
     rm(urlFile);
   }
   return target;
@@ -102,7 +112,7 @@ function main(slugs: string[]) {
 
   for (const meta of datasets) {
     const scriptFile = path.join(meta.repoDir, "quicktype.sh");
-    const cachedDataDir = precacheDataDirectory(meta.dataDir);
+    const cachedDataDir = precacheDataDirectory(meta);
 
     cloneOrCreateRepo(meta);
 
