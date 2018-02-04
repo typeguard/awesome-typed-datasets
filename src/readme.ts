@@ -1,6 +1,6 @@
 import { languages } from "quicktype";
 
-import { Dataset, DatasetMeta } from "./common";
+import { Dataset, DatasetMeta, repoFromSlug } from "./common";
 import * as lo from "lodash";
 
 export default function readme(data: DatasetMeta[]): string {
@@ -17,9 +17,9 @@ export default function readme(data: DatasetMeta[]): string {
         simpleUrl = simpleUrl.substr(0, simpleUrl.length - 1);
       }
 
-      yield `* [${meta.dataset.name}](https://github.com/typeguard/types-${
+      yield `* [${meta.dataset.name}](https://github.com/${repoFromSlug(
         meta.slug
-      }) (${simpleUrl})`;
+      )}) (${simpleUrl})`;
     }
   }
 

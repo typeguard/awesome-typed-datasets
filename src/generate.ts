@@ -4,6 +4,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 import { Dataset, Convert } from "./dataset";
+import { repoFromSlug } from "./common";
 import readme from "./readme";
 
 import { languages } from "quicktype";
@@ -28,10 +29,6 @@ function hub(command: string) {
 function quicktype(command: string) {
   console.error(`quicktype ${command}`);
   return exec(`${QUICKTYPE_BIN} ${command}`);
-}
-
-function repoFromSlug(slug: string) {
-  return `typeguard/types-${slug}`;
 }
 
 function remoteFromSlug(slug: string) {
@@ -75,7 +72,7 @@ function cloneOrCreateRepo(dataset: Dataset, slug: string, directory: string) {
     hub("init");
     hub(`commit --allow-empty -m create`);
     hub(
-      `create typeguard/types-${slug} -d "${dataset.name}" -h "${dataset.url}"`
+      `create ${repoFromSlug(slug)} -d "${dataset.name}" -h "${dataset.url}"`
     );
     hub("push --set-upstream origin master");
   });

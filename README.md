@@ -8,31 +8,31 @@ reading and writing the JSON produced by these APIs.
 
 ## Blockchain
 
-* [Blockchain Bitcoin APIs](https://github.com/typeguard/types-blockchain) (blockchain.info)
+* [Blockchain Bitcoin APIs](https://github.com/typeguard/typed-blockchain) (blockchain.info)
 
 ## Economics
 
-* [Worldbank GDP](https://github.com/typeguard/types-worldbank-gdp) (api.worldbank.org)
+* [Worldbank GDP](https://github.com/typeguard/typed-worldbank-gdp) (api.worldbank.org)
 
 ## Finance
 
-* [Consumer Complaint Database](https://github.com/typeguard/types-consumer-complaints) (catalog.data.gov/dataset/consumer-complaint-database)
+* [Consumer Complaint Database](https://github.com/typeguard/typed-consumer-complaints) (catalog.data.gov/dataset/consumer-complaint-database)
 
 ## Media
 
-* [Reddit](https://github.com/typeguard/types-reddit) (reddit.com)
+* [Reddit](https://github.com/typeguard/typed-reddit) (reddit.com)
 
 ## Science
 
-* [USGS Earthquake Data](https://github.com/typeguard/types-earthquakes) (earthquake.usgs.gov)
+* [USGS Earthquake Data](https://github.com/typeguard/typed-earthquakes) (earthquake.usgs.gov)
 
 ## Space
 
-* [Open APIs From Space](https://github.com/typeguard/types-astronauts-in-space) (open-notify.org)
+* [Open APIs From Space](https://github.com/typeguard/typed-astronauts-in-space) (open-notify.org)
 
 ## Technology
 
-* [GitHub API](https://github.com/typeguard/types-github) (api.github.com)
+* [GitHub API](https://github.com/typeguard/typed-github) (api.github.com)
 
 ## Contributing
 If you want to contribute, please read the [contribution guidelines](CONTRIBUTING.md).

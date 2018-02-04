@@ -8,3 +8,7 @@ export type DatasetMeta = {
 };
 
 export { Dataset } from "./dataset";
+
+export function repoFromSlug(slug: string) {
+  return `typeguard/typed-${slug}`;
+}
