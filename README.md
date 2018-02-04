@@ -14,6 +14,10 @@ reading and writing the JSON produced by these APIs.
 
 * [Consumer Complaint Database](https://github.com/typeguard/types-consumer-complaints) (catalog.data.gov/dataset/consumer-complaint-database)
 
+### Media
+
+* [Reddit](https://github.com/typeguard/types-reddit) (reddit.com)
+
 ### Science
 
 * [USGS Earthquake Data](https://github.com/typeguard/types-earthquakes) (earthquake.usgs.gov)
