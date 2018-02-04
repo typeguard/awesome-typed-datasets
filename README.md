@@ -10,6 +10,10 @@ reading and writing the JSON produced by these APIs.
 
 * [Blockchain Bitcoin APIs](https://github.com/typeguard/types-blockchain) (blockchain.info)
 
+## Economics
+
+* [Worldbank GDP](https://github.com/typeguard/types-worldbank-gdp) (api.worldbank.org)
+
 ## Finance
 
 * [Consumer Complaint Database](https://github.com/typeguard/types-consumer-complaints) (catalog.data.gov/dataset/consumer-complaint-database)
