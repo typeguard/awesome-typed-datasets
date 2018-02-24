@@ -3,3 +3,4 @@
 /src/dataset.ts
 /repos
 /setup-env
+.envrc
