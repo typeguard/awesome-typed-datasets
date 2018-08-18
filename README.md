@@ -2,7 +2,7 @@
 
 These are public JSON datasets that have been strongly
 typed with [quicktype](https://github.com/quicktype/quicktype).
-Each is a repo with code in Go, C++, Objective-C, Java, TypeScript, Swift, Elm, JSON Schema, and C# for
+Each is a repo with code in Go, Rust, C++, Objective-C, Java, TypeScript, JavaScript, Flow, Swift, Kotlin (beta), Elm, JSON Schema, Ruby, Dart, Python, and C# for
 reading and writing the JSON produced by these APIs.
 
 

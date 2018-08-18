@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { languages } from "quicktype";
+import { defaultTargetLanguages } from "quicktype/dist/quicktype-core";
 
 import {
   Dataset,
@@ -34,7 +34,7 @@ export function dataset(data: DatasetMeta): string {
 
     yield `## Libraries`;
     yield ``;
-    for (const language of languages) {
+    for (const language of defaultTargetLanguages) {
       yield `* [${language.displayName}](${languageShortname(language)})`;
     }
     yield ``;
@@ -74,7 +74,7 @@ export function main(data: DatasetMeta[]): string {
   function* generate() {
     yield `# Awesome Typed Datasets [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)`;
 
-    const displayNames = languages
+    const displayNames = defaultTargetLanguages
       .map(l => l.displayName)
       .filter(d => d !== "Simple Types");
     const nameList =

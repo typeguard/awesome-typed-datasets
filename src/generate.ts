@@ -8,8 +8,7 @@ import { Dataset, Convert } from "./dataset";
 import { repoFromSlug, DatasetMeta, languageShortname } from "./common";
 import * as readme from "./readme";
 
-import { languages } from "quicktype";
-import { TargetLanguage } from "quicktype/dist/TargetLanguage";
+import { defaultTargetLanguages } from "quicktype/dist/quicktype-core";
 
 const QUICKTYPE_BIN = path.resolve("node_modules/.bin/quicktype");
 const DATASET_CACHE = "datasets-cache";
@@ -123,7 +122,7 @@ function main(slugs: string[]) {
 
     let script = ["#!/bin/bash", ""];
 
-    for (const language of languages) {
+    for (const language of defaultTargetLanguages) {
       const langName = languageShortname(language);
       const languageDir = path.join(meta.repoDir, langName);
       const mainFile = path.join(
